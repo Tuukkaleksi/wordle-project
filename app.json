@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "ed2a4b1a-7a9f-40dc-b8bc-47e0a60990c3"
+      }
+    },
+    "owner": "tjaprojects"
   }
 }
