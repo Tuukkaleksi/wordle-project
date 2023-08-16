@@ -26,5 +26,7 @@
 </div>
 <hr>
 
+<div align="center">
 [![GitHub stars](https://img.shields.io/github/stars/Tuukkaleksi/wordle-project.svg?style=social)](https://github.com/Tuukkaleksi/wordle-project/stargazers) <br>
 [![GitHub forks](https://img.shields.io/github/forks/Tuukkaleksi/wordle-project-game.svg?style=social)](https://github.com/Tuukkaleksi/wordle-project/network)
+</div>
