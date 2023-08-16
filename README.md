@@ -19,9 +19,13 @@
 
 ## Screenshots (Placeholder)
 
-![Screenshot 1](screenshots/screenshot1.png) <br>
-![Screenshot 2](screenshots/screenshot2.png) <br>
-![Screenshot 3](screenshots/screenshot3.png)
+<div align="center">
+  <img src="screenshots/screenshot1.png" alt="Screenshot 1" width="200"/><br>
+  <img src="screenshots/screenshot2.png" alt="Screenshot 2" width="200"/><br>
+  <img src="screenshots/screenshot3.png" alt="Screenshot 3" width="200"/>
+</div>
 
-[![GitHub stars](https://img.shields.io/github/stars/Tuukkaleksi/wordle-project.svg?style=social)](https://github.com/Tuukkaleksi/wordle-project/stargazers) <br>
-[![GitHub forks](https://img.shields.io/github/forks/Tuukkaleksi/wordle-project-game.svg?style=social)](https://github.com/Tuukkaleksi/wordle-project/network)
+<div align="center">
+  [![GitHub stars](https://img.shields.io/github/stars/Tuukkaleksi/wordle-project.svg?style=social)](https://github.com/Tuukkaleksi/wordle-project/stargazers) <br>
+  [![GitHub forks](https://img.shields.io/github/forks/Tuukkaleksi/wordle-project-game.svg?style=social)](https://github.com/Tuukkaleksi/wordle-project/network)
+</div>
