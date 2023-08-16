@@ -29,6 +29,7 @@
   #### Game includes advertisments.
   - Can guess a new word, when watching one advertisment.
   - Might remove this feature.
+<hr>
 
 <div align="center">
 [![GitHub stars](https://img.shields.io/github/stars/Tuukkaleksi/wordle-project.svg?style=social)](https://github.com/Tuukkaleksi/wordle-project/stargazers) <br>
