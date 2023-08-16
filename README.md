@@ -1,4 +1,4 @@
-# Wordle
+# Wordle-Project
 
     Welcome to Word Guessing Game, a fun and addictive word puzzle game inspired by the popular Wordle game. 
     Test your vocabulary and logic skills by guessing the hidden word within a limited number of attempts.
