@@ -20,9 +20,9 @@
 ## Screenshots (Placeholder)
 
 <div align="center">
-  <img src="screenshots/screenshot1.png" alt="Screenshot 1" width="200"/><br>
-  <img src="screenshots/screenshot2.png" alt="Screenshot 2" width="200"/><br>
-  <img src="screenshots/screenshot3.png" alt="Screenshot 3" width="200"/>
+  <img src="assets/favicon.png" alt="Screenshot 1" width="64"/><br>
+  <img src="assets/favicon.png" alt="Screenshot 2" width="64"/><br>
+  <img src="assets/favicon.png" alt="Screenshot 3" width="64"/>
 </div>
 
 ## Advertisment
