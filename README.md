@@ -19,8 +19,8 @@
 
 ## Screenshots (Placeholder)
 
-![Screenshot 1](screenshots/screenshot1.png)
-![Screenshot 2](screenshots/screenshot2.png)
+![Screenshot 1](screenshots/screenshot1.png) <br>
+![Screenshot 2](screenshots/screenshot2.png) <br>
 ![Screenshot 3](screenshots/screenshot3.png)
 
 [![GitHub stars](https://img.shields.io/github/stars/Tuukkaleksi/wordle-project.svg?style=social)](https://github.com/Tuukkaleksi/wordle-project/stargazers) <br>
