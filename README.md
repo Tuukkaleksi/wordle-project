@@ -24,7 +24,11 @@
   <img src="screenshots/screenshot2.png" alt="Screenshot 2" width="200"/><br>
   <img src="screenshots/screenshot3.png" alt="Screenshot 3" width="200"/>
 </div>
-<hr>
+
+## Advertisment
+  #### Game includes advertisments.
+  - Can guess a new word, when watching one advertisment.
+  - Might remove this feature.
 
 <div align="center">
 [![GitHub stars](https://img.shields.io/github/stars/Tuukkaleksi/wordle-project.svg?style=social)](https://github.com/Tuukkaleksi/wordle-project/stargazers) <br>
