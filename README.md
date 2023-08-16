@@ -9,7 +9,7 @@
   - 📊 Track your progress with the score and level system ( Maybe? )
   - 🌈 Stylish and user-friendly interface
   - 🔄 Randomized word selection for endless replayability
-  - 📱 Built using React Native and Expo for cross-platform compatibility (Android for now)
+  - 📱 Built using React Native and Expo for cross-platform compatibility ( Android for now )
 
 ## Playing
     Enjoy the game and have fun challenging your word-guessing skills! If you encounter any issues or have suggestions, 
