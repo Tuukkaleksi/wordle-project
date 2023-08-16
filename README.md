@@ -12,8 +12,8 @@
   - 📱 Built using React Native and Expo for cross-platform compatibility ( Android for now )
 
 ## Playing
-    Enjoy the game and have fun challenging your word-guessing skills! If you encounter any issues or have suggestions, 
-    feel free to open an issue or contribute to the project. Happy guessing!
+    Enjoy the game and have fun challenging your word-guessing skills! 
+    If you encounter any issues or have suggestions, feel free to open an issue. Happy guessing!
 
     This will be replaced when App is coming to Google Play
 
