@@ -24,8 +24,7 @@
   <img src="screenshots/screenshot2.png" alt="Screenshot 2" width="200"/><br>
   <img src="screenshots/screenshot3.png" alt="Screenshot 3" width="200"/>
 </div>
+<hr>
 
-<div align="center">
-  [![GitHub stars](https://img.shields.io/github/stars/Tuukkaleksi/wordle-project.svg?style=social)](https://github.com/Tuukkaleksi/wordle-project/stargazers) <br>
-  [![GitHub forks](https://img.shields.io/github/forks/Tuukkaleksi/wordle-project-game.svg?style=social)](https://github.com/Tuukkaleksi/wordle-project/network)
-</div>
+[![GitHub stars](https://img.shields.io/github/stars/Tuukkaleksi/wordle-project.svg?style=social)](https://github.com/Tuukkaleksi/wordle-project/stargazers) <br>
+[![GitHub forks](https://img.shields.io/github/forks/Tuukkaleksi/wordle-project-game.svg?style=social)](https://github.com/Tuukkaleksi/wordle-project/network)
