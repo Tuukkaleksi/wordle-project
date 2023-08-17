@@ -8,6 +8,7 @@ export default function App() {
 
   const [targetWord, setTargetWord] = useState(generateRandomWord());
   const [guess, setGuess] = useState('');
+  const [revealedLetters, setRevealedLetters] = useState();
   const [attempts, setAttempts] = useState(0);
   const [guessedLetters, setGuessedLetters] = useState(Array(6).fill(Array(5).fill('')));
 
@@ -28,6 +29,27 @@ export default function App() {
     // Update game state based on correct or incorrect guess
   }
 
+  //Get a letter when pressing question mark button
+  function getWord() {
+    const unrevealedIndices = targetWord
+      .split('')
+      .map((_, index) => index)
+      .filter(index => !revealedLetters.includes(index));
+
+    if (unrevealedIndices.length > 0) {
+      const randomIndex = unrevealedIndices[Math.floor(Math.random() * unrevealedIndices.length)];
+      const updatedGuessedLetters = guessedLetters.map((row, rowIndex) =>
+        rowIndex === attempts
+          ? row.map((letter, colIndex) =>
+              colIndex === randomIndex ? targetWord[colIndex] : letter
+            )
+          : row
+      );
+      setGuessedLetters(updatedGuessedLetters);
+      setRevealedLetters([...revealedLetters, randomIndex]);
+    }
+  }
+  //Reset the Game and generate new random word
   function resetGame() {
     setTargetWord(generateRandomWord());
     setGuess('');
@@ -75,7 +97,7 @@ export default function App() {
       <TouchableOpacity style={styles.button} onPress={handleGuess}>
         <Icon name='send' size={15} color='white' />
       </TouchableOpacity>
-      <TouchableOpacity style={styles.questButton}>
+      <TouchableOpacity style={styles.questButton} onPress={getWord}>
         <Icon name='question' size={18} color='white' />
       </TouchableOpacity>
       <TouchableOpacity style={styles.resetButton} onPress={resetGame}>
