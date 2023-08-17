@@ -76,7 +76,7 @@ export default function App() {
       </TouchableOpacity>
           <Text>{targetWord}</Text>
       <TouchableOpacity style={styles.resetButton} onPress={resetGame}>
-        <Text>Reset</Text>
+      <Icon name='refresh' size={18} color='white' />
       </TouchableOpacity>
       <StatusBar style="auto" />
     </View>
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginTop: 10,
     left: '85%',
-    top: '75.65%',
+    top: '83.5%',
     position: 'absolute'
   },
   resetButton: {
@@ -120,6 +120,9 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     marginTop: 10,
+    left: '85%',
+    top: '-1.5%',
+    position: 'absolute',
   },
   guessContainer: {
     flexDirection: 'column',
