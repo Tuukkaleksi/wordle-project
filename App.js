@@ -71,13 +71,17 @@ export default function App() {
         value={guess}
         placeholder="Enter your guess"
       />
+      {/* Buttons */}
       <TouchableOpacity style={styles.button} onPress={handleGuess}>
         <Icon name='send' size={15} color='white' />
       </TouchableOpacity>
-          <Text>{targetWord}</Text>
-      <TouchableOpacity style={styles.resetButton} onPress={resetGame}>
-      <Icon name='refresh' size={18} color='white' />
+      <TouchableOpacity style={styles.questButton}>
+        <Icon name='question' size={18} color='white' />
       </TouchableOpacity>
+      <TouchableOpacity style={styles.resetButton} onPress={resetGame}>
+        <Icon name='refresh' size={18} color='white' />
+      </TouchableOpacity>
+        <Text>{targetWord}</Text>
       <StatusBar style="auto" />
     </View>
   );
@@ -115,13 +119,23 @@ const styles = StyleSheet.create({
     top: '83.5%',
     position: 'absolute'
   },
+  questButton: {
+    backgroundColor: 'lightcoral',
+    width: 35,
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 10,
+    left: '100%',
+    top: '48%',
+    position: 'absolute',
+  },
   resetButton: {
     backgroundColor: 'lightcoral',
     padding: 10,
     borderRadius: 5,
     marginTop: 10,
-    left: '85%',
-    top: '-1.5%',
+    left: '100%',
+    top: '59%',
     position: 'absolute',
   },
   guessContainer: {
