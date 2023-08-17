@@ -9,7 +9,7 @@ export default function App() {
   const [targetWord, setTargetWord] = useState(generateRandomWord());
   const [guess, setGuess] = useState('');
   const [attempts, setAttempts] = useState(0);
-  const [guessedLetters, setGuessedLetters] = useState(Array(6).fill(Array(5).fill(null)));
+  const [guessedLetters, setGuessedLetters] = useState(Array(6).fill(Array(5).fill('')));
 
   function generateRandomWord() {
     const randomIndex = Math.floor(Math.random() * words.length);
@@ -32,7 +32,7 @@ export default function App() {
     setTargetWord(generateRandomWord());
     setGuess('');
     setAttempts(0);
-    setGuessedLetters(Array(6).fill(Array(5).fill(null)));
+    setGuessedLetters(Array(6).fill(Array(5).fill('')));
   }
 
   return (
@@ -43,12 +43,19 @@ export default function App() {
           <View key={rowIndex} style={styles.guessedRow}>
             {row.map((letter, colIndex) => {
               const correctPosition = targetWord[colIndex] === letter;
+              const includedInWord = targetWord.includes(letter);
               return (
                 <View
                   key={colIndex}
                   style={[
                     styles.guessedLetterBox,
-                    correctPosition ? styles.correctBox : styles.incorrectBox,
+                    correctPosition
+                    ? styles.correctBox
+                    : letter === ''
+                    ? styles.emptyBox
+                    : includedInWord
+                    ? styles.includedBox 
+                    : styles.incorrectBox,
                   ]}
                 >
                   <Text style={styles.guessedLetter}>{letter}</Text>
@@ -130,15 +137,27 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 5,
   },
+  emptyBox: {
+    backgroundColor: 'white',
+    borderColor: 'black',
+    borderWidth: 1.5,
+  },
   correctBox: {
     backgroundColor: 'lightgreen',
+    borderColor: 'black',
+    borderWidth: 1.5,
   },
   incorrectBox: {
-    backgroundColor: 'white',
+    backgroundColor: 'lightgray',
     borderColor: 'black',
     borderWidth: 1.5,
   },
   guessedLetter: {
     fontSize: 24,
+  },
+  includedBox: {
+    backgroundColor: 'yellow',
+    borderColor: 'black',
+    borderWidth: 1.5,
   },
 });
