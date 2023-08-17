@@ -8,7 +8,7 @@ export default function App() {
 
   const [targetWord, setTargetWord] = useState(generateRandomWord());
   const [guess, setGuess] = useState('');
-  const [revealedLetters, setRevealedLetters] = useState();
+  const [revealedLetters, setRevealedLetters] = useState([]);
   const [attempts, setAttempts] = useState(0);
   const [guessedLetters, setGuessedLetters] = useState(Array(6).fill(Array(5).fill('')));
 
