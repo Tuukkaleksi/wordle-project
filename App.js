@@ -133,12 +133,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
   },
   button: {
-    backgroundColor: 'lightblue',
+    width: 37,
+    height: 35,
+    backgroundColor: 'darkcyan',
     padding: 10,
     borderRadius: 5,
     marginTop: 10,
-    left: '85%',
-    top: '83.5%',
+    left: '84.5%',
+    top: '83.6%',
     position: 'absolute'
   },
   questButton: {
