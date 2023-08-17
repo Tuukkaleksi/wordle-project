@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function App() {
-  const words = ['apple', 'banana', 'cherry', 'grape', 'orange']; // Add more words here
+  const words = ['apple', 'baker', 'cabin', 'cable', 'daddy', 'dizzy', 'eagle', 'eager', 'early', 'faces', 'flame', 'fuzzy', 'grape', 'jazzy', 'jelly', 'kebab', 'latch', 'lunar', 'mirth', 'nudge', 'oasis', 'ocean', 'peach', 'pizza', 'plaza', 'quest', 'quiet', 'roast', 'saber', 'sable', 'squat', 'sugar', 'sweep', 'table', 'thorn', 'tiger', 'umbra', 'vague', 'vivid', 'vowel', 'waltz', 'wrist', 'xerox', 'yacht', 'yummy', 'zesty', 'zebra'];
 
   const [targetWord, setTargetWord] = useState(generateRandomWord());
   const [guess, setGuess] = useState('');
@@ -36,8 +37,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>Guess the Wordle!</Text>
-      <Text>Attempts: {attempts}</Text>
+      <Text style={styles.title}>Wordle</Text>
       <View style={styles.guessContainer}>
         {guessedLetters.map((row, rowIndex) => (
           <View key={rowIndex} style={styles.guessedRow}>
@@ -65,8 +65,9 @@ export default function App() {
         placeholder="Enter your guess"
       />
       <TouchableOpacity style={styles.button} onPress={handleGuess}>
-        <Text>Guess</Text>
+        <Icon name='send' size={15} color='white' />
       </TouchableOpacity>
+          <Text>{targetWord}</Text>
       <TouchableOpacity style={styles.resetButton} onPress={resetGame}>
         <Text>Reset</Text>
       </TouchableOpacity>
@@ -78,12 +79,19 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    top: '15%',
     backgroundColor: '#fff',
     alignItems: 'center',
+    alignSelf: 'center',
     justifyContent: 'center',
+    position: 'absolute',
+  },
+  title: {
+    marginBottom: 15,
+    fontSize: 36
   },
   input: {
-    width: '80%',
+    width: '100%',
     height: 40,
     borderColor: 'gray',
     borderWidth: 1,
@@ -96,6 +104,9 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     marginTop: 10,
+    left: '85%',
+    top: '75.65%',
+    position: 'absolute'
   },
   resetButton: {
     backgroundColor: 'lightcoral',
@@ -120,10 +131,12 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   correctBox: {
-    backgroundColor: 'green',
+    backgroundColor: 'lightgreen',
   },
   incorrectBox: {
-    backgroundColor: 'darkgray',
+    backgroundColor: 'white',
+    borderColor: 'black',
+    borderWidth: 1.5,
   },
   guessedLetter: {
     fontSize: 24,
