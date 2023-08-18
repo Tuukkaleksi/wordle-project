@@ -29,6 +29,12 @@
   #### Game includes advertisments.
   - Can guess a new word, when watching one advertisment.
   - Might remove this feature.
+
+## Bugs / What to do
+  - When using Question Mark button and then typing the word, it replaces the where it has been used. ( Bug )
+  - Change from white to darkish so eyes doesnt burn ( to do )
+  - Add score / level system, question mark and reset points ( to do )
+  - get points using ads ( to do )
 <hr>
 
 [![GitHub stars](https://img.shields.io/github/stars/Tuukkaleksi/wordle-project.svg?style=social)](https://github.com/Tuukkaleksi/wordle-project/stargazers) <br>
