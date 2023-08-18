@@ -28,6 +28,7 @@
 ## Advertisment
   #### Game includes advertisments.
   - Can guess a new word, when watching one advertisment.
+  - Get points when watching advertisment.
   - Might remove this feature.
 
 ## Bugs / What to do
