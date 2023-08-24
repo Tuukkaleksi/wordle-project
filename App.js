@@ -7,6 +7,14 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 export default function App() {
   const words = ['apple', 'baker', 'cabin', 'cable', 'daddy', 'dizzy', 'eagle', 'eager', 'early', 'faces', 'flame', 'fuzzy', 'grape', 'jazzy', 'jelly', 'kebab', 'latch', 'lunar', 'mirth', 'nudge', 'oasis', 'ocean', 'peach', 'pizza', 'plaza', 'quest', 'quiet', 'roast', 'saber', 'sable', 'squat', 'sugar', 'sweep', 'table', 'thorn', 'tiger', 'umbra', 'vague', 'vivid', 'vowel', 'waltz', 'wrist', 'xerox', 'yacht', 'yummy', 'zesty', 'zebra'];
 
+  /* 
+    Title and input area to white when pressing darkButton
+    Point System: getWord, resetGame, How many wins etc
+    Signup and Login System to save the progress (Not necessery)
+    Ads to raise the points, 30sec = getWord + resetGame, and short = getWord (like 2 points)
+    Everytime user clicks a button remove certain point
+  */
+
   const [backgroundColor, setBackgroundColor] = useState('white');
   const [targetWord, setTargetWord] = useState(generateRandomWord());
   const [guess, setGuess] = useState('');
@@ -116,6 +124,7 @@ export default function App() {
           <Icon name='lightbulb-o' size={15} color='white' />
         </TouchableOpacity>
       </View>
+      <Text>{targetWord}</Text>
     </View>
   );
 };
