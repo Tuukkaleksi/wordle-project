@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
+/* import { StatusBar } from 'expo-status-bar'; */
+/* import app from '/components/firebaseConfig'; */
 import { Text, View, TextInput, TouchableOpacity } from 'react-native';
 import styles from './components/styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -8,9 +9,9 @@ export default function App() {
   const words = ['apple', 'baker', 'cabin', 'cable', 'daddy', 'dizzy', 'eagle', 'eager', 'early', 'faces', 'flame', 'fuzzy', 'grape', 'jazzy', 'jelly', 'kebab', 'latch', 'lunar', 'mirth', 'nudge', 'oasis', 'ocean', 'peach', 'pizza', 'plaza', 'quest', 'quiet', 'roast', 'saber', 'sable', 'squat', 'sugar', 'sweep', 'table', 'thorn', 'tiger', 'umbra', 'vague', 'vivid', 'vowel', 'waltz', 'wrist', 'xerox', 'yacht', 'yummy', 'zesty', 'zebra'];
 
   /* 
-    Title and input area to white when pressing darkButton
+    Title and input area to white (currently just black) when pressing darkButton
     Point System: getWord, resetGame, How many wins etc
-    Signup and Login System to save the progress (Not necessery) can add a login button that user can press it and login/signup
+    Signup and Login System to save the progress (Not necessery) can add a login button that user can press it and login/signup (using firebase and config already done ./components/firebaseConfig.js)
     Ads to raise the points, 30sec = getWord + resetGame, and short = getWord (like 2 points) popup or when pressing and points are 0 get popup if user wants more
     Everytime user clicks a button remove certain point
     Menu? Add github button? Credits?
