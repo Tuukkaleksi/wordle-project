@@ -1,21 +1,29 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity } from 'react-native';
+import styles from './components/styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function App() {
   const words = ['apple', 'baker', 'cabin', 'cable', 'daddy', 'dizzy', 'eagle', 'eager', 'early', 'faces', 'flame', 'fuzzy', 'grape', 'jazzy', 'jelly', 'kebab', 'latch', 'lunar', 'mirth', 'nudge', 'oasis', 'ocean', 'peach', 'pizza', 'plaza', 'quest', 'quiet', 'roast', 'saber', 'sable', 'squat', 'sugar', 'sweep', 'table', 'thorn', 'tiger', 'umbra', 'vague', 'vivid', 'vowel', 'waltz', 'wrist', 'xerox', 'yacht', 'yummy', 'zesty', 'zebra'];
 
+  const [backgroundColor, setBackgroundColor] = useState('white');
   const [targetWord, setTargetWord] = useState(generateRandomWord());
   const [guess, setGuess] = useState('');
   const [revealedLetters, setRevealedLetters] = useState([]);
   const [attempts, setAttempts] = useState(0);
   const [guessedLetters, setGuessedLetters] = useState(Array(6).fill(Array(5).fill('')));
 
+  //Change background color from a button
+  const changeBackgroundColor = () => {
+    const newColor = backgroundColor === 'white' ? 'lightblue' : 'white';
+    setBackgroundColor(newColor);
+  };
+
   function generateRandomWord() {
     const randomIndex = Math.floor(Math.random() * words.length);
     return words[randomIndex];
-  }
+  };
 
   function handleGuess() {
     // Update guessedLetters with the new guess
@@ -58,7 +66,7 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor }]}>
       <Text style={styles.title}>Wordle</Text>
       <View style={styles.guessContainer}>
         {guessedLetters.map((row, rowIndex) => (
@@ -94,111 +102,20 @@ export default function App() {
         placeholder="Enter your guess"
       />
       {/* Buttons */}
-      <TouchableOpacity style={styles.button} onPress={handleGuess}>
-        <Icon name='send' size={15} color='white' />
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.questButton} onPress={getWord}>
-        <Icon name='question' size={18} color='white' />
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.resetButton} onPress={resetGame}>
-        <Icon name='refresh' size={18} color='white' />
-      </TouchableOpacity>
-        <Text>{targetWord}</Text>
-      <StatusBar style="auto" />
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button} onPress={handleGuess}>
+          <Icon name='send' size={15} color='white' />
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.button, styles.questButton]} onPress={getWord}>
+          <Icon name='question' size={18} color='white' />
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.button, styles.resetButton]} onPress={resetGame}>
+          <Icon name='refresh' size={18} color='white' />
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.button, styles.darkbutton]} onPress={changeBackgroundColor}>
+          <Icon name='lightbulb-o' size={15} color='white' />
+        </TouchableOpacity>
+      </View>
     </View>
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    top: '15%',
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    alignSelf: 'center',
-    justifyContent: 'center',
-    position: 'absolute',
-  },
-  title: {
-    marginBottom: 15,
-    fontSize: 36
-  },
-  input: {
-    width: '100%',
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginTop: 10,
-    marginBottom: 10,
-    paddingHorizontal: 8,
-  },
-  button: {
-    width: 37,
-    height: 35,
-    backgroundColor: 'darkcyan',
-    padding: 10,
-    borderRadius: 5,
-    marginTop: 10,
-    left: '84.5%',
-    top: '83.6%',
-    position: 'absolute'
-  },
-  questButton: {
-    backgroundColor: 'lightcoral',
-    width: 35,
-    padding: 10,
-    borderRadius: 5,
-    marginTop: 10,
-    left: '100%',
-    top: '48%',
-    position: 'absolute',
-  },
-  resetButton: {
-    backgroundColor: 'lightcoral',
-    padding: 10,
-    borderRadius: 5,
-    marginTop: 10,
-    left: '100%',
-    top: '59%',
-    position: 'absolute',
-  },
-  guessContainer: {
-    flexDirection: 'column',
-    marginTop: 20,
-  },
-  guessedRow: {
-    flexDirection: 'row',
-  },
-  guessedLetterBox: {
-    width: 40,
-    height: 40,
-    marginRight: 10,
-    marginBottom: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
-  },
-  emptyBox: {
-    backgroundColor: 'white',
-    borderColor: 'black',
-    borderWidth: 1.5,
-  },
-  correctBox: {
-    backgroundColor: 'lightgreen',
-    borderColor: 'black',
-    borderWidth: 1.5,
-  },
-  incorrectBox: {
-    backgroundColor: 'lightgray',
-    borderColor: 'black',
-    borderWidth: 1.5,
-  },
-  guessedLetter: {
-    fontSize: 24,
-  },
-  includedBox: {
-    backgroundColor: 'yellow',
-    borderColor: 'black',
-    borderWidth: 1.5,
-  },
-});
+};
