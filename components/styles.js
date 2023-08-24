@@ -12,7 +12,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     title: {
-        marginBottom: 15,
+        position: 'absolute',
+        top: 120,
         fontSize: 36,
     },
     input: {
@@ -23,6 +24,8 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginBottom: 10,
         paddingHorizontal: 8,
+        position: 'absolute',
+        top: '75%'
     },
     buttonContainer: {
         flexDirection: 'row',
@@ -51,8 +54,11 @@ const styles = StyleSheet.create({
     },
     guessContainer: {
         flexDirection: 'column',
-        marginTop: 20,
+        marginTop: 0,
         marginBottom: 5,
+        position: 'absolute',
+        bottom: '25%',
+        left: '16.5%',
     },
     guessedRow: {
         flexDirection: 'row',
