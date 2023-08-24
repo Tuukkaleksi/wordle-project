@@ -10,9 +10,10 @@ export default function App() {
   /* 
     Title and input area to white when pressing darkButton
     Point System: getWord, resetGame, How many wins etc
-    Signup and Login System to save the progress (Not necessery)
-    Ads to raise the points, 30sec = getWord + resetGame, and short = getWord (like 2 points)
+    Signup and Login System to save the progress (Not necessery) can add a login button that user can press it and login/signup
+    Ads to raise the points, 30sec = getWord + resetGame, and short = getWord (like 2 points) popup or when pressing and points are 0 get popup if user wants more
     Everytime user clicks a button remove certain point
+    Menu? Add github button? Credits?
   */
 
   const [backgroundColor, setBackgroundColor] = useState('white');
