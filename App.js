@@ -16,7 +16,7 @@ export default function App() {
 
   //Change background color from a button
   const changeBackgroundColor = () => {
-    const newColor = backgroundColor === 'white' ? 'lightblue' : 'white';
+    const newColor = backgroundColor === 'white' ? 'darkslategrey' : 'white';
     setBackgroundColor(newColor);
   };
 
