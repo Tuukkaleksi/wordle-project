@@ -21,6 +21,7 @@ export default function App() {
 
   const [backgroundColor, setBackgroundColor] = useState('white');
   const [darkmode, setDarkMode] = useState(false);
+  const [showmenu, setShowmenu] = useState(false);
   const [targetWord, setTargetWord] = useState(generateRandomWord());
   const [guess, setGuess] = useState('');
   const [revealedLetters, setRevealedLetters] = useState([]);
@@ -31,7 +32,12 @@ export default function App() {
   const changeBackgroundColor = () => {
     const newColor = darkmode ? 'white' : '#121212';
     setBackgroundColor(newColor);
-    setDarkMode(!darkmode); // Toggle dark mode state
+    setDarkMode(!darkmode);
+  };
+
+  //ToggleMenu
+  const toggleMenu = () => {
+    setShowmenu(!showmenu);
   };
 
   function generateRandomWord() {
@@ -129,12 +135,12 @@ export default function App() {
         <TouchableOpacity style={[styles.button, styles.darkbutton]} onPress={changeBackgroundColor}>
           <Icon name='lightbulb-o' size={15} color='white' />
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, styles.userbutton]}>
+        <TouchableOpacity style={[styles.button, styles.userbutton]} onPress={toggleMenu}>
           <Icon name='user' size={15} color='white' />
         </TouchableOpacity>
       </View>
       <Text>{targetWord}</Text>
-      <Menu />
+      {showmenu && <Menu />}
   </KeyboardAvoidingView>
   );
 };
