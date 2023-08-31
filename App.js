@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Text, View, TextInput, TouchableOpacity, KeyboardAvoidingView, SafeAreaView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-/* import { StatusBar } from 'expo-status-bar'; */
-/* import app from '/components/firebaseConfig'; */
 import Menu from './components/menu';
 import words from './components/words';
 import styles from './components/styles';
@@ -10,8 +8,6 @@ import styles from './components/styles';
 export default function App() {
 
   /* 
-    IMPORTANT: six word words/letters cant be done, give the user a prompt that says word not availabe
-    Title and input area to white (currently just black) when pressing darkButton
     Point System: getWord, resetGame, How many wins etc
     Signup and Login System to save the progress (Not necessery) can add a login button that user can press it and login/signup (using firebase and config already done ./components/firebaseConfig.js)
     Ads to raise the points, 30sec = getWord + resetGame, and short = getWord (like 2 points) popup or when pressing and points are 0 get popup if user wants more
@@ -45,16 +41,27 @@ export default function App() {
     return words[randomIndex];
   };
 
+  //Handle input so user cannot enter more or less than 5 letter word.
+  function handleInputGuess(text) {
+    if (text.length <= 5) {
+      setGuess(text);
+    }
+  };
+
   function handleGuess() {
     // Update guessedLetters with the new guess
-    const updatedGuessedLetters = guessedLetters.map((row, rowIndex) =>
-      rowIndex === attempts ? guess.toLowerCase().split('') : row
-    );
+    if (guess.length === 5) {
+      const updatedGuessedLetters = guessedLetters.map((row, rowIndex) =>
+        rowIndex === attempts ? guess.toLowerCase().split('') : row
+      );
     setGuessedLetters(updatedGuessedLetters);
 
     setAttempts(attempts + 1);
     // Check the guess against the targetWord and provide feedback
     // Update game state based on correct or incorrect guess
+    } else {
+      alert('Please Enter a 5-letter word.');
+    }
   }
 
   //Get a letter when pressing question mark button
