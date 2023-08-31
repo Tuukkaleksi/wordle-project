@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 /* import { StatusBar } from 'expo-status-bar'; */
 /* import app from '/components/firebaseConfig'; */
-import { Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, KeyboardAvoidingView, SafeAreaView } from 'react-native';
 import styles from './components/styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -19,6 +19,7 @@ export default function App() {
   */
 
   const [backgroundColor, setBackgroundColor] = useState('white');
+  const [darkmode, setDarkMode] = useState(false);
   const [targetWord, setTargetWord] = useState(generateRandomWord());
   const [guess, setGuess] = useState('');
   const [revealedLetters, setRevealedLetters] = useState([]);
@@ -27,8 +28,9 @@ export default function App() {
 
   //Change background color from a button
   const changeBackgroundColor = () => {
-    const newColor = backgroundColor === 'white' ? 'darkslategrey' : 'white';
+    const newColor = darkmode ? 'white' : '#121212';
     setBackgroundColor(newColor);
+    setDarkMode(!darkmode); // Toggle dark mode state
   };
 
   function generateRandomWord() {
@@ -77,11 +79,11 @@ export default function App() {
   }
 
   return (
-    <View style={[styles.container, { backgroundColor }]}>
-      <Text style={styles.title}>Wordle</Text>
-      <View style={styles.guessContainer}>
+  <KeyboardAvoidingView style={[styles.container, { backgroundColor }]}>
+      <Text style={[styles.title, { color: darkmode ? 'white' : 'black' }]}>Wordle</Text>
+      <SafeAreaView style={styles.guessContainer}>
         {guessedLetters.map((row, rowIndex) => (
-          <View key={rowIndex} style={styles.guessedRow}>
+          <KeyboardAvoidingView key={rowIndex} style={styles.guessedRow}>
             {row.map((letter, colIndex) => {
               const correctPosition = targetWord[colIndex] === letter;
               const includedInWord = targetWord.includes(letter);
@@ -103,11 +105,11 @@ export default function App() {
                 </View>
               );
             })}
-          </View>
+          </KeyboardAvoidingView>
         ))}
-      </View>
+      </SafeAreaView>
       <TextInput
-        style={styles.input}
+        style={[styles.input, { color: darkmode ? 'white' : 'black' }]}
         onChangeText={text => setGuess(text)}
         value={guess}
         placeholder="Enter your guess"
@@ -126,8 +128,11 @@ export default function App() {
         <TouchableOpacity style={[styles.button, styles.darkbutton]} onPress={changeBackgroundColor}>
           <Icon name='lightbulb-o' size={15} color='white' />
         </TouchableOpacity>
+        <TouchableOpacity style={[styles.button, styles.userbutton]}>
+          <Icon name='user' size={15} color='white' />
+        </TouchableOpacity>
       </View>
       <Text>{targetWord}</Text>
-    </View>
+  </KeyboardAvoidingView>
   );
 };

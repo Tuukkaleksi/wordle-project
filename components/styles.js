@@ -3,8 +3,6 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     container: {
         position: 'absolute',
-        top: 0,
-        left: 0,
         width: '100%',
         height: '100%',
         backgroundColor: '#fff',
@@ -15,12 +13,15 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 120,
         fontSize: 36,
+        color: 'white',
     },
     input: {
         width: '80%',
         height: 40,
-        borderColor: 'gray',
+        backgroundColor: 'white',
+        borderColor: 'black',
         borderWidth: 1,
+        borderRadius: 3,
         marginTop: 10,
         marginBottom: 10,
         paddingHorizontal: 8,
