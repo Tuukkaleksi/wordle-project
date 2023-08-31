@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 /* import { StatusBar } from 'expo-status-bar'; */
 /* import app from '/components/firebaseConfig'; */
+import Menu from './components/menu';
 import { Text, View, TextInput, TouchableOpacity, KeyboardAvoidingView, SafeAreaView } from 'react-native';
 import styles from './components/styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -133,6 +134,7 @@ export default function App() {
         </TouchableOpacity>
       </View>
       <Text>{targetWord}</Text>
+      <Menu />
   </KeyboardAvoidingView>
   );
 };
