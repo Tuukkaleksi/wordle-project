@@ -5,10 +5,13 @@ const Menu = () => {
     return(
         <View style={styles.menu}>
             <Text style={styles.title}>Sign In</Text>
-            <TextInput style={styles.input} placeholder='Username' />
+            <TextInput style={styles.input} placeholder='Email' />
             <TextInput style={styles.input} placeholder='Password' />
             <TouchableOpacity style={styles.button}>
               <Text>Sign In</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button}>
+                <Text>Register</Text>
             </TouchableOpacity>
         </View>
     );
@@ -19,7 +22,7 @@ export default Menu;
 const styles = StyleSheet.create({
     menu: {
         flex: 1,
-        backgroundColor: '#121212',
+        backgroundColor: '#242424',
         justifyContent: 'center',
         alignItems: 'center',
         zIndex: 999,
@@ -34,7 +37,7 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 30,
         position: 'absolute',
-        top: 50
+        top: 40,
     },
     input: {
         width: '80%',

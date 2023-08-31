@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 5,
     },
     darkbutton: {
-        backgroundColor: 'darkkhaki',
+        backgroundColor: 'lightcoral',
     },
     questButton: {
         backgroundColor: 'lightcoral',

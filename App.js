@@ -30,7 +30,7 @@ export default function App() {
 
   //Change background color from a button
   const changeBackgroundColor = () => {
-    const newColor = darkmode ? 'white' : '#121212';
+    const newColor = darkmode ? 'white' : '#242424';
     setBackgroundColor(newColor);
     setDarkMode(!darkmode);
   };
