@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
         marginBottom: 5,
         position: 'absolute',
         bottom: '25%',
-        left: '16.5%',
+        left: '20%',
     },
     guessedRow: {
         flexDirection: 'row',
