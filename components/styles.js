@@ -23,8 +23,8 @@ const styles = StyleSheet.create({
         height: 40,
         backgroundColor: 'transparent',
         borderColor: 'darkcyan',
-        borderWidth: 1,
-        borderRadius: 3,
+        borderWidth: 2,
+        borderRadius: 4,
         marginTop: 10,
         marginBottom: 10,
         paddingHorizontal: 8,
@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 20,
         right: 20,
+        marginTop: 0,
     },
     button: {
         height: 40,

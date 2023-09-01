@@ -90,7 +90,7 @@ const Menu = () => {
 
     const handleLogout = async () => {
         try {
-            await signOut(auth);
+            await auth.signOut();
         } catch (error) {
             console.error("Error handleLogout.")
         }
@@ -110,7 +110,7 @@ const Menu = () => {
                             <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                 <View style={{flex: 1, width: '40%', height: 1, backgroundColor: 'black'}} />
                                     <View>
-                                        <Text style={{width: 50, textAlign: 'center', fontSize: 16, marginBottom: 5}}>Points</Text>
+                                        <Text style={{width: 50, textAlign: 'center', fontSize: 18, marginBottom: 5}}>Points</Text>
                                     </View>
                                 <View style={{flex: 1, height: 1, backgroundColor: 'black'}} />
                             </View>
@@ -159,7 +159,7 @@ export default Menu;
 const styles = StyleSheet.create({
     menu: {
         flex: 1,
-        backgroundColor: 'transparent',
+        backgroundColor: '#242424',
         justifyContent: 'center',
         alignItems: 'center',
         zIndex: 999,
@@ -175,6 +175,9 @@ const styles = StyleSheet.create({
         fontSize: 30,
         position: 'absolute',
         top: 40,
+        textShadowColor: 'darkcyan',
+        textShadowOffset: { width: 1, height: 1 },
+        textShadowRadius: 8,
     },
     input: {
         width: '100%',
@@ -186,6 +189,10 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginBottom: 10,
         paddingHorizontal: 8,
+        borderWidth: 2,
+        borderRadius: 8,
+        borderColor: 'darkcyan',
+
     },
     button: {
         backgroundColor: 'white',
