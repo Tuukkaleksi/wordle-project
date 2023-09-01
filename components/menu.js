@@ -1,7 +1,8 @@
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import { auth } from './firebaseConfig';
 import { getDatabase, ref, set } from 'firebase/database';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 /*
     DATABASE IN USE: Firebase Database. (Config found in firebaseConfig.js)
@@ -24,33 +25,50 @@ import { getDatabase, ref, set } from 'firebase/database';
 */
 
 const Menu = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     const handleSignup = async () => {
         try {
-        //Create a database entry for the user
-        const db = getDatabase();
-        const userRef = ref(db, `${user.uid}`);
-        set(userRef, {
-            email: email,
-            pass: password,
-            settings: {
-                level: 1,
-                score: 0,
-                getWord: 4,
-                resetGame: 2,
-                newTimer: 0,
-            },
-        });
-    } catch (error) {
-        console.error(error.message);
-    }
-};
+            const { user } = await createUserWithEmailAndPassword(auth, email, password);
+            console.log("User Created.");
+
+            //Create a database entry for the user
+            const db = getDatabase();
+            const userRef = ref(db, `${user.uid}`);
+            set(userRef, {
+                email: email,
+                pass: password,
+                settings: {
+                    level: 1,
+                    score: 0,
+                    getWord: 4,
+                    resetGame: 2,
+                    newTimer: 0,
+                },
+            });
+        } catch (error) {
+            console.error(error.message);
+        }
+    };
 
     return(
         <View style={styles.menu}>
             <Text style={styles.title}>Sign In</Text>
-            <TextInput style={styles.input} placeholder='Email' />
-            <TextInput style={styles.input} placeholder='Password' />
+            <TextInput 
+                style={styles.input} 
+                keyboardType='email-address' 
+                placeholder='Email' 
+                value={email}
+                onChangeText={(text) => setEmail(text)}
+            />
+            <TextInput 
+                style={styles.input} 
+                secureTextEntry={true}
+                placeholder='Password'
+                value={password}
+                onChangeText={(text) => setPassword(text)}
+            />
             <TouchableOpacity style={styles.button}>
               <Text>Sign In</Text>
             </TouchableOpacity>
