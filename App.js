@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, TextInput, TouchableOpacity, KeyboardAvoidingView, SafeAreaView, Pressable } from 'react-native';
+import { Text, View, TextInput, KeyboardAvoidingView, SafeAreaView, Pressable } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Menu from './components/menu';
 import words from './components/words';
@@ -76,9 +76,6 @@ export default function App() {
       .map((_, index) => index)
       .filter(index => !revealedLetters.includes(index));
   
-    console.log("revealedLetters: ", revealedLetters);
-    console.log("unrevealedIndices: ", unrevealedIndices);
-  
     if (unrevealedIndices.length > 0) {
       const randomIndex = unrevealedIndices[Math.floor(Math.random() * unrevealedIndices.length)];
       const updatedGuessedLetters = guessedLetters.map((row, rowIndex) =>
@@ -96,7 +93,6 @@ export default function App() {
     }
   }  
 
-  //Reset the Game and generate new random word
   function resetGame() {
     setTargetWord(generateRandomWord());
     setGuess('');
