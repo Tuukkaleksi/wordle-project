@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { Text, View, TextInput, KeyboardAvoidingView, SafeAreaView, Pressable } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Text, View, TextInput, KeyboardAvoidingView, SafeAreaView, Pressable } from 'react-native'; 
+import { getDatabase, ref, get } from 'firebase/database';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Menu from './components/menu';
 import words from './components/words';
@@ -21,6 +23,47 @@ export default function App() {
   const [targetWord, setTargetWord] = useState(generateRandomWord());
   const [revealedLetters, setRevealedLetters] = useState([]);
   const [guessedLetters, setGuessedLetters] = useState(Array(6).fill(Array(5).fill('')));
+  const [dataFound, setDataFound] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in.
+        setUser(user);
+        fetchDataFromDatabase(user);
+      } else {
+        // User is signed out.
+        setUser(null);
+      }
+    });
+  }, []);
+
+  async function fetchDataFromDatabase(user) {
+    if (user) {
+      const db = getDatabase();
+      const userRef = ref(db, `${user.uid}`);
+
+      try {
+        const snapshot = await get(userRef);
+        if (snapshot.exists()) {
+          const userData = snapshot.val();
+          console.log("Data Found: ", userData);
+          setDataFound(true);
+        } else {
+          console.log("Data not Found.");
+          setDataFound(false);
+        }
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    }
+  }
+
+  useEffect(() => {
+    fetchDataFromDatabase();
+  }, []);
 
   //Change background color from a button
   const changeBackgroundColor = () => {
