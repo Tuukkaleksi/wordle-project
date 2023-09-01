@@ -159,16 +159,16 @@ export default Menu;
 const styles = StyleSheet.create({
     menu: {
         flex: 1,
-        backgroundColor: '#242424',
+        backgroundColor: 'transparent',
         justifyContent: 'center',
         alignItems: 'center',
         zIndex: 999,
         position: 'absolute',
-        width: '95%',
+        width: '90%',
         height: 400,
         borderRadius: 20,
-        borderWidth: 3,
-        borderColor: 'white',
+        borderWidth: 2,
+        borderColor: 'lightcoral',
     },
     title: {
         color: 'white',
@@ -199,7 +199,8 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     },
     logContainer: {
-        width: '90%',
+        width: '95%',
+        height: '100%',
         flex: 1,
         alignItems: 'center',
         marginTop: 20,
@@ -217,7 +218,7 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     logText: {
-        fontSize: 18,
+        fontSize: 20,
         marginBottom: 10,
         color: '#242424',
     },
