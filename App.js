@@ -8,6 +8,7 @@ import styles from './components/styles';
 export default function App() {
 
   /* 
+    Question Mark (getWord) breaks? i don't know why
     Point System: getWord, resetGame, How many wins etc
     Signup and Login System to save the progress (Not necessery) can add a login button that user can press it and login/signup (using firebase and config already done ./components/firebaseConfig.js)
     Ads to raise the points, 30sec = getWord + resetGame, and short = getWord (like 2 points) popup or when pressing and points are 0 get popup if user wants more
@@ -70,8 +71,9 @@ export default function App() {
       .split('')
       .map((_, index) => index)
       .filter(index => !revealedLetters.includes(index));
-
+      console.log("line 74.");
     if (unrevealedIndices.length > 0) {
+      console.log("line 76.");
       const randomIndex = unrevealedIndices[Math.floor(Math.random() * unrevealedIndices.length)];
       const updatedGuessedLetters = guessedLetters.map((row, rowIndex) =>
         rowIndex === attempts
@@ -82,6 +84,7 @@ export default function App() {
       );
       setGuessedLetters(updatedGuessedLetters);
       setRevealedLetters([...revealedLetters, randomIndex]);
+      console.log("line 87.");
     }
   }
   //Reset the Game and generate new random word
@@ -146,7 +149,7 @@ export default function App() {
           <Icon name='user' size={15} color='white' />
         </TouchableOpacity>
       </View>
-      <Text>{targetWord}</Text>
+      <Text style={[{ color: darkmode ? 'white' : 'black' }]}>{targetWord}</Text>
       {showmenu && <Menu />}
   </KeyboardAvoidingView>
   );
