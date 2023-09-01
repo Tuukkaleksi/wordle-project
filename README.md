@@ -32,10 +32,6 @@
   - Might remove this feature.
 
 ## Bugs / What to do
-  - When using Question Mark button and then typing the word, it replaces where it has been used. ( Bug )
-  - Change from white to darkish so eyes doesnt burn ( to do )
-  - User intergation / log in + sign up ( to do )
-  - Add score / level system, question mark and reset points ( to do )
   - get points using ads ( to do )
 <hr>
 
