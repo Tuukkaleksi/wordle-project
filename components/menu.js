@@ -1,8 +1,8 @@
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import React, { useState } from 'react';
 import { auth } from './firebaseConfig';
 import { getDatabase, ref, set } from 'firebase/database';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 
 /*
     DATABASE IN USE: Firebase Database. (Config found in firebaseConfig.js)
@@ -49,6 +49,17 @@ const Menu = () => {
             });
         } catch (error) {
             console.error(error.message);
+            alert('Password should be at least 6 characters.');
+        }
+    };
+
+    const handleLogin = async () => {
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            console.log("User Found.");
+        } catch (error) {
+            console.error(error.message);
+            alert('Invalid email or password.')
         }
     };
 
@@ -57,7 +68,7 @@ const Menu = () => {
             <Text style={styles.title}>Sign In</Text>
             <TextInput 
                 style={styles.input} 
-                keyboardType='email-address' 
+                inputMode='email-address' 
                 placeholder='Email' 
                 value={email}
                 onChangeText={(text) => setEmail(text)}
@@ -69,12 +80,12 @@ const Menu = () => {
                 value={password}
                 onChangeText={(text) => setPassword(text)}
             />
-            <TouchableOpacity style={styles.button}>
+            <Pressable style={styles.button} onPress={handleLogin}>
               <Text>Sign In</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={handleSignup}>
+            </Pressable>
+            <Pressable style={styles.button} onPress={handleSignup}>
                 <Text>Register</Text>
-            </TouchableOpacity>
+            </Pressable>
         </View>
     );
 };
@@ -89,7 +100,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         zIndex: 999,
         position: 'absolute',
-        width: 300,
+        width: '100%',
         height: 400,
         borderRadius: 20,
         borderWidth: 3,

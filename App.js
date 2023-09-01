@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, TextInput, TouchableOpacity, KeyboardAvoidingView, SafeAreaView } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, KeyboardAvoidingView, SafeAreaView, Pressable } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Menu from './components/menu';
 import words from './components/words';
@@ -133,21 +133,21 @@ export default function App() {
       />
       {/* Buttons */}
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={handleGuess}>
+        <Pressable style={styles.button} onPress={handleGuess}>
           <Icon name='send' size={15} color='white' />
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, styles.questButton]} onPress={getWord}>
+        </Pressable>
+        <Pressable style={[styles.button, styles.questButton]} onPress={getWord}>
           <Icon name='question' size={18} color='white' />
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, styles.resetButton]} onPress={resetGame}>
+        </Pressable>
+        <Pressable style={[styles.button, styles.resetButton]} onPress={resetGame}>
           <Icon name='refresh' size={18} color='white' />
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, styles.darkbutton]} onPress={changeBackgroundColor}>
+        </Pressable>
+        <Pressable style={[styles.button, styles.darkbutton]} onPress={changeBackgroundColor}>
           <Icon name='lightbulb-o' size={15} color='white' />
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, styles.userbutton]} onPress={toggleMenu}>
+        </Pressable>
+        <Pressable style={[styles.button, styles.userbutton]} onPress={toggleMenu}>
           <Icon name='user' size={15} color='white' />
-        </TouchableOpacity>
+        </Pressable>
       </View>
       <Text style={[{ color: darkmode ? 'white' : 'black' }]}>{targetWord}</Text>
       {showmenu && <Menu />}
