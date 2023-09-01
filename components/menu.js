@@ -1,7 +1,7 @@
 import { Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { auth } from './firebaseConfig';
-import { getDatabase, ref, set } from 'firebase/database';
+import { getDatabase, ref, set, get } from 'firebase/database';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 
 /*
@@ -23,10 +23,29 @@ const Menu = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [user, setUser] = useState(null);
+    const [userData, setUserData] = useState(null);
 
     useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged((user) => {
-            setUser(user);
+        const unsubscribe = auth.onAuthStateChanged(async (authUser) => {
+            setUser(authUser);
+            if (authUser) {
+                //Fetch user data
+                const db = getDatabase();
+                const userRef = ref(db, `${authUser.uid}`);
+                try {
+                    const snapshot = await get(userRef);
+                    if (snapshot.exists()) {
+                        setUserData(snapshot.val());
+                    } else {
+                        console.log('User data not found.');
+                    }
+                } catch (error) {
+                    console.log("Error fetching: ", error);
+                }
+            } else {
+                //Clear user data when not logged in
+                setUserData(null);
+            }
         });
 
         return () => {
@@ -81,40 +100,55 @@ const Menu = () => {
         <View style={styles.menu}>
             <Text style={styles.title}>Sign In</Text>
             {user ? (
-            <View style={styles.logContainer}>
-                <Text style={styles.logText}>Welcome, {user.email}</Text>
-                <Text style={styles.logText}>Level: {user.level}</Text>
-                <Text style={styles.logText}>Score: {user.score}</Text>
-                <Text style={styles.logText}>Get A Letter: {user.getWord}</Text>
-                <Text style={styles.logText}>Get New Word: {user.resetGame}</Text>
-                <Text style={styles.logText}>New Word Timer: {user.newTimer}</Text>
-            <Pressable style={styles.logButton} onPress={handleLogout}>
-                <Text style={styles.logButtonText}>Log Out</Text>
-            </Pressable>
-            </View>
+                // Display user information when logged in
+                <View style={styles.logContainer}>
+                    <Text style={styles.logText}>Welcome, {user.email}</Text>
+                    {userData ? (
+                        <View>
+                            <Text style={styles.logText}>Level: {userData.settings.level}</Text>
+                            <Text style={styles.logText}>Score: {userData.settings.score}</Text>
+                            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                <View style={{flex: 1, width: '40%', height: 1, backgroundColor: 'black'}} />
+                                    <View>
+                                        <Text style={{width: 50, textAlign: 'center', fontSize: 16, marginBottom: 5}}>Points</Text>
+                                    </View>
+                                <View style={{flex: 1, height: 1, backgroundColor: 'black'}} />
+                            </View>
+                            <Text style={styles.logText}>Get A Letter: {userData.settings.getWord}</Text>
+                            <Text style={styles.logText}>Get New Word: {userData.settings.resetGame}</Text>
+                            <Text style={styles.logText}>New Word Timer: {userData.settings.newTimer}</Text>
+                        </View>
+                    ) : (
+                        <Text style={styles.logText}>Loading...</Text>
+                    )}
+                    <Pressable style={styles.logButton} onPress={handleLogout}>
+                        <Text style={styles.logButtonText}>Log Out</Text>
+                    </Pressable>
+                </View>
             ) : (
-            <View>
-                <TextInput 
-                    style={styles.input} 
-                    inputMode='email-address' 
-                    placeholder='Email' 
-                    value={email}
-                    onChangeText={(text) => setEmail(text)}
-                />
-                <TextInput 
-                    style={styles.input} 
-                    secureTextEntry={true}
-                    placeholder='Password'
-                    value={password}
-                    onChangeText={(text) => setPassword(text)}
-                />
-                <Pressable style={styles.button} onPress={handleLogin}>
-                <Text>Sign In</Text>
-                </Pressable>
-                <Pressable style={styles.button} onPress={handleSignup}>
-                    <Text>Register</Text>
-                </Pressable>
-            </View>
+                // Display sign-in/register form when not logged in
+                <View>
+                    <TextInput
+                        style={styles.input}
+                        inputMode='email-address'
+                        placeholder='Email'
+                        value={email}
+                        onChangeText={(text) => setEmail(text)}
+                    />
+                    <TextInput
+                        style={styles.input}
+                        secureTextEntry={true}
+                        placeholder='Password'
+                        value={password}
+                        onChangeText={(text) => setPassword(text)}
+                    />
+                    <Pressable style={styles.button} onPress={handleLogin}>
+                        <Text>Sign In</Text>
+                    </Pressable>
+                    <Pressable style={styles.button} onPress={handleSignup}>
+                        <Text>Register</Text>
+                    </Pressable>
+                </View>
             )}
         </View>
     );
@@ -143,7 +177,7 @@ const styles = StyleSheet.create({
         top: 40,
     },
     input: {
-        width: '80%',
+        width: '100%',
         height: 40,
         backgroundColor: 'white',
         borderColor: 'white',
@@ -156,15 +190,16 @@ const styles = StyleSheet.create({
     button: {
         backgroundColor: 'white',
         marginTop: 10,
-        width: '60%',
-        height: '10%',
+        width: '100%',
+        height: 40,
         justifyContent: 'center',
         alignItems: 'center',
-        borderColor: 'white',
+        borderColor: '#242424',
         borderWidth: 1,
-        borderRadius: 3,
+        borderRadius: 5,
     },
     logContainer: {
+        width: '90%',
         flex: 1,
         alignItems: 'center',
         marginTop: 20,
@@ -200,5 +235,5 @@ const styles = StyleSheet.create({
     logButtonText: {
         color: 'white',
         fontSize: 16,
-    },    
+    },
 });
