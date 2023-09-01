@@ -110,7 +110,7 @@ const Menu = () => {
                             <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                 <View style={{flex: 1, width: '40%', height: 1, backgroundColor: 'black'}} />
                                     <View>
-                                        <Text style={{width: 50, textAlign: 'center', fontSize: 18, marginBottom: 5}}>Points</Text>
+                                        <Text style={{width: 50, textAlign: 'center', fontSize: 16, marginBottom: 5}}>Points</Text>
                                     </View>
                                 <View style={{flex: 1, height: 1, backgroundColor: 'black'}} />
                             </View>
@@ -127,10 +127,10 @@ const Menu = () => {
                 </View>
             ) : (
                 // Display sign-in/register form when not logged in
-                <View>
+                <View style={styles.container}>
                     <TextInput
                         style={styles.input}
-                        inputMode='email-address'
+                        inputMode='email'
                         placeholder='Email'
                         value={email}
                         onChangeText={(text) => setEmail(text)}
@@ -169,6 +169,15 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         borderWidth: 2,
         borderColor: 'lightcoral',
+    },
+    container: {
+        width: '95%',
+        height: '100%',
+        flex: 1,
+        alignItems: 'center',
+        marginTop: 50,
+        marginBottom: 20,
+        padding: 30,
     },
     title: {
         color: 'white',

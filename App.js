@@ -8,9 +8,6 @@ import styles from './components/styles';
 export default function App() {
 
   /* 
-    Question Mark (getWord) breaks? i don't know why
-    Point System: getWord, resetGame, How many wins etc
-    Signup and Login System to save the progress (Not necessery) can add a login button that user can press it and login/signup (using firebase and config already done ./components/firebaseConfig.js)
     Ads to raise the points, 30sec = getWord + resetGame, and short = getWord (like 2 points) popup or when pressing and points are 0 get popup if user wants more
     Everytime user clicks a button remove certain point
     Add github button? Credits?
@@ -50,18 +47,25 @@ export default function App() {
   };
 
   function handleGuess() {
-    // Update guessedLetters with the new guess
-    if (guess.length === 5) {
-      const updatedGuessedLetters = guessedLetters.map((row, rowIndex) =>
-        rowIndex === attempts ? guess.toLowerCase().split('') : row
-      );
-    setGuessedLetters(updatedGuessedLetters);
-
-    setAttempts(attempts + 1);
-    // Check the guess against the targetWord and provide feedback
-    // Update game state based on correct or incorrect guess
+    if (guess === targetWord) {
+      alert('Congratulations! You guessed the correct word: ' + targetWord);
+      resetGame();
     } else {
-      alert('Please Enter a 5-letter word.');
+      if (guess.length === 5) {
+        const updatedGuessedLetters = guessedLetters.map((row, rowIndex) =>
+          rowIndex === attempts ? guess.toLowerCase().split('') : row
+        );
+        setGuessedLetters(updatedGuessedLetters);
+  
+        setAttempts(attempts + 1);
+  
+        if (attempts >= 5) {
+            alert('Sorry, you reached the maxium number of attempts. The correct word was: ' + targetWord);
+            resetGame();//For now.
+        }
+      } else {
+        alert('Please Enter a 5-letter word.');
+      }
     }
   }
 
@@ -71,9 +75,11 @@ export default function App() {
       .split('')
       .map((_, index) => index)
       .filter(index => !revealedLetters.includes(index));
-      console.log("line 74.");
+  
+    console.log("revealedLetters: ", revealedLetters);
+    console.log("unrevealedIndices: ", unrevealedIndices);
+  
     if (unrevealedIndices.length > 0) {
-      console.log("line 76.");
       const randomIndex = unrevealedIndices[Math.floor(Math.random() * unrevealedIndices.length)];
       const updatedGuessedLetters = guessedLetters.map((row, rowIndex) =>
         rowIndex === attempts
@@ -82,17 +88,21 @@ export default function App() {
             )
           : row
       );
+  
       setGuessedLetters(updatedGuessedLetters);
       setRevealedLetters([...revealedLetters, randomIndex]);
-      console.log("line 87.");
+    } else {
+      console.log("All letters revealed.");
     }
-  }
+  }  
+
   //Reset the Game and generate new random word
   function resetGame() {
     setTargetWord(generateRandomWord());
     setGuess('');
     setAttempts(0);
     setGuessedLetters(Array(6).fill(Array(5).fill('')));
+    setRevealedLetters([]);
   }
 
   return (
