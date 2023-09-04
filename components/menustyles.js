@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
         height: '100%',
         flex: 1,
         alignItems: 'center',
+        textAlign: 'center',
         marginTop: 20,
         marginBottom: 20,
         padding: 20,
@@ -87,6 +88,11 @@ const styles = StyleSheet.create({
     },
     logText: {
         fontSize: 20,
+        marginBottom: 10,
+        color: '#242424',
+    },
+    logTextTitle: {
+        fontSize: 24,
         marginBottom: 10,
         color: '#242424',
     },

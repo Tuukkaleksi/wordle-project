@@ -104,21 +104,21 @@ const Menu = () => {
             {user ? (
                 // Display user information when logged in
                 <View style={styles.logContainer}>
-                    <Text style={styles.logText}>Welcome, {user.email}</Text>
+                    <Text style={styles.logTextTitle}>Statistics{/* , {user.email} */}</Text>
                     {userData ? (
-                        <View>
+                        <View style={{alignItems: 'center', width: '80%'}}>
                             <Text style={styles.logText}>Level: {userData.settings.level}</Text>
                             <Text style={styles.logText}>Score: {userData.settings.score}</Text>
-                            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                                <View style={{flex: 1, width: '40%', height: 1, backgroundColor: 'black'}} />
+                            <View style={{flexDirection: 'row', width: '100%', alignItems: 'center'}}>
+                                <View style={{flex: 1, width: '100%', height: 1, backgroundColor: 'black'}} />
                                     <View>
-                                        <Text style={{width: 50, textAlign: 'center', fontSize: 16, marginBottom: 5}}>Points</Text>
+                                        <Text style={{marginLeft: 1, marginRight: 5, width: '100%', textAlign: 'center', fontSize: 16, marginBottom: 5}}>Points</Text>
                                     </View>
-                                <View style={{flex: 1, height: 1, backgroundColor: 'black'}} />
+                                <View style={{flex: 1, width: '100%', height: 1, backgroundColor: 'black'}} />
                             </View>
-                            <Text style={styles.logText}>Get A Letter: {userData.settings.getWord}</Text>
-                            <Text style={styles.logText}>Get New Word: {userData.settings.resetGame}</Text>
-                            <Text style={styles.logText}>New Word Timer: {userData.settings.newTimer}</Text>
+                            <Text style={styles.logText}>Help: {userData.settings.getWord}</Text>
+                            <Text style={styles.logText}>Reset: {userData.settings.resetGame}</Text>
+                            <Text style={styles.logText}>New Word: {userData.settings.newTimer}</Text>
                         </View>
                     ) : (
                         <Text style={styles.logText}>Loading...</Text>
