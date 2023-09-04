@@ -1,8 +1,10 @@
-import { Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Pressable, Text, TextInput, View } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { auth } from './firebaseConfig';
 import { getDatabase, ref, set, get } from 'firebase/database';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import styles from './menustyles';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 /*
     BUILD IN DATABASE:
@@ -121,9 +123,14 @@ const Menu = () => {
                     ) : (
                         <Text style={styles.logText}>Loading...</Text>
                     )}
-                    <Pressable style={styles.logButton} onPress={handleLogout}>
-                        <Text style={styles.logButtonText}>Log Out</Text>
-                    </Pressable>
+                    <View style={styles.buttonContainer}>
+                        <Pressable style={styles.storeButton}>
+                            <Icon name="shopping-cart" size={18} color='white' />
+                        </Pressable>
+                        <Pressable style={styles.logButton} onPress={handleLogout}>
+                            <Icon name='sign-out' size={18} color='white' />
+                        </Pressable>
+                    </View>
                 </View>
             ) : (
                 // Display sign-in/register form when not logged in
@@ -155,102 +162,3 @@ const Menu = () => {
 };
 
 export default Menu;
-
-const styles = StyleSheet.create({
-    menu: {
-        flex: 1,
-        backgroundColor: '#242424',
-        justifyContent: 'center',
-        alignItems: 'center',
-        zIndex: 999,
-        position: 'absolute',
-        width: '90%',
-        height: 400,
-        borderRadius: 20,
-        borderWidth: 2,
-        borderColor: 'lightcoral',
-    },
-    container: {
-        width: '95%',
-        height: '100%',
-        flex: 1,
-        alignItems: 'center',
-        marginTop: 50,
-        marginBottom: 20,
-        padding: 30,
-    },
-    title: {
-        color: 'white',
-        fontSize: 30,
-        position: 'absolute',
-        top: 40,
-        textShadowColor: 'darkcyan',
-        textShadowOffset: { width: 1, height: 1 },
-        textShadowRadius: 8,
-    },
-    input: {
-        width: '100%',
-        height: 40,
-        backgroundColor: 'white',
-        borderColor: 'white',
-        borderWidth: 1,
-        borderRadius: 3,
-        marginTop: 10,
-        marginBottom: 10,
-        paddingHorizontal: 8,
-        borderWidth: 2,
-        borderRadius: 8,
-        borderColor: 'darkcyan',
-
-    },
-    button: {
-        backgroundColor: 'white',
-        marginTop: 10,
-        width: '100%',
-        height: 40,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderColor: '#242424',
-        borderWidth: 1,
-        borderRadius: 5,
-    },
-    logContainer: {
-        width: '95%',
-        height: '100%',
-        flex: 1,
-        alignItems: 'center',
-        marginTop: 20,
-        marginBottom: 20,
-        padding: 20,
-        backgroundColor: 'white',
-        borderRadius: 10,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-    },
-    logText: {
-        fontSize: 20,
-        marginBottom: 10,
-        color: '#242424',
-    },
-    logButton: {
-        backgroundColor: '#242424',
-        marginTop: 10,
-        width: '60%',
-        height: 40,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderColor: '#242424',
-        borderWidth: 1,
-        borderRadius: 5,
-    },
-    logButtonText: {
-        color: 'white',
-        fontSize: 16,
-    },
-});
