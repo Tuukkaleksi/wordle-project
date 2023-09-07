@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         borderRadius: 10,
         marginBottom: 10,
+        width: '95%',
     },
     packageButtonText: {
         color: 'white',
