@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { auth } from './firebaseConfig';
 import { getDatabase, ref, set, get } from 'firebase/database';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import Store from './store';
 import styles from './styles/menustyles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -26,6 +27,7 @@ const Menu = () => {
     const [password, setPassword] = useState('');
     const [user, setUser] = useState(null);
     const [userData, setUserData] = useState(null);
+    const [showmenu, setShowmenu] = useState(false);
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(async (authUser) => {
@@ -98,7 +100,12 @@ const Menu = () => {
         }
     };
 
-    return(
+    //ToggleMenu
+    const toggleStore = () => {
+        setShowmenu(!showmenu);
+    };
+
+    return (
         <View style={styles.menu}>
             <Text style={styles.title}>Sign In</Text>
             {user ? (
@@ -124,7 +131,7 @@ const Menu = () => {
                         <Text style={styles.logText}>Loading...</Text>
                     )}
                     <View style={styles.buttonContainer}>
-                        <Pressable style={styles.storeButton}>
+                        <Pressable style={styles.storeButton} onPress={toggleStore}>
                             <Icon name="shopping-cart" size={18} color='white' />
                         </Pressable>
                         <Pressable style={styles.logButton} onPress={handleLogout}>
@@ -157,6 +164,7 @@ const Menu = () => {
                     </Pressable>
                 </View>
             )}
+            {showmenu && <Store />}
         </View>
     );
 };
