@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     menu: {
         flex: 1,
-        backgroundColor: '#242424',
+        backgroundColor: 'rgba(36, 36, 36, 0.65)',
         justifyContent: 'center',
         alignItems: 'center',
         zIndex: 999,
@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
         fontSize: 24,
         marginBottom: 10,
         color: '#242424',
+        fontWeight: 'bold',
     },
     logButton: {
         height: 40,

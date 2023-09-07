@@ -5,7 +5,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Menu from './components/menu';
 import words from './components/words';
-import styles from './components/styles';
+import styles from './components/styles/styles';
 
 export default function App() {
 
@@ -132,6 +132,7 @@ export default function App() {
       setGuessedLetters(updatedGuessedLetters);
       setRevealedLetters([...revealedLetters, randomIndex]);
     } else {
+      alert("All letters revealed.");
       console.log("All letters revealed.");
     }
   }  

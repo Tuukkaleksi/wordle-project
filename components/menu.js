@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { auth } from './firebaseConfig';
 import { getDatabase, ref, set, get } from 'firebase/database';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
-import styles from './menustyles';
+import styles from './styles/menustyles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 /*
@@ -107,18 +107,18 @@ const Menu = () => {
                     <Text style={styles.logTextTitle}>Statistics{/* , {user.email} */}</Text>
                     {userData ? (
                         <View style={{alignItems: 'center', width: '80%'}}>
-                            <Text style={styles.logText}>Level: {userData.settings.level}</Text>
+                            <Text style={styles.logText}>Level: <Text style={{fontWeight: 'bold'}}>{userData.settings.level}</Text></Text>
                             <Text style={styles.logText}>Score: {userData.settings.score}</Text>
                             <View style={{flexDirection: 'row', width: '100%', alignItems: 'center'}}>
                                 <View style={{flex: 1, width: '100%', height: 1, backgroundColor: 'black'}} />
                                     <View>
-                                        <Text style={{marginLeft: 1, marginRight: 5, width: '100%', textAlign: 'center', fontSize: 16, marginBottom: 5}}>Points</Text>
+                                        <Text style={{marginLeft: 1, marginRight: 10, width: '100%', textAlign: 'center', fontSize: 16, marginBottom: 5, fontWeight: 'bold'}}>Points</Text>
                                     </View>
                                 <View style={{flex: 1, width: '100%', height: 1, backgroundColor: 'black'}} />
                             </View>
-                            <Text style={styles.logText}>Help: {userData.settings.getWord}</Text>
-                            <Text style={styles.logText}>Reset: {userData.settings.resetGame}</Text>
-                            <Text style={styles.logText}>New Word: {userData.settings.newTimer}</Text>
+                            <Text style={styles.logText}>Help: <Text style={{fontWeight: 'bold'}}>{userData.settings.getWord}</Text></Text>
+                            <Text style={styles.logText}>Reset: <Text style={{fontWeight: 'bold'}}>{userData.settings.resetGame}</Text></Text>
+                            <Text style={styles.logText}>New Word: <Text style={{fontWeight: 'bold'}}>{userData.settings.newTimer}</Text></Text>
                         </View>
                     ) : (
                         <Text style={styles.logText}>Loading...</Text>
