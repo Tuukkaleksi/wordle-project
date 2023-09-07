@@ -26,7 +26,7 @@ const Store = () => {
             <Pressable style={styles.packageButton}>
                 <Text style={styles.packageButtonText}>Ultimate Package</Text>
                 <Text style={styles.packagePoints}>$24.99</Text>
-                <Text style={styles.packageDescription}>Get More Points To Help You, Help: 15, Reset: 4</Text>
+                <Text style={styles.packageDescription}>Get More Points To Help You, Help: 20, Reset: 4</Text>
             </Pressable>
         </View>
     );

@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
         fontSize: 30,
         position: 'relative',
         top: 0,
+        marginBottom: 5,
     },
     packageButtons: {
         flexDirection: 'column',
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
         bottom: 20,
     },
     packageButton: {
-        backgroundColor: 'blue',
+        backgroundColor: 'lightcoral',
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderRadius: 10,
