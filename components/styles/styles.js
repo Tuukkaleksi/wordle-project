@@ -18,6 +18,15 @@ const styles = StyleSheet.create({
         textShadowOffset: { width: 1, height: 1 },
         textShadowRadius: 8,
     },
+    undertitle: {
+        position: 'absolute',
+        top: 165,
+        fontSize: 24,
+        color: 'white',
+        textShadowColor: 'darkcyan',
+        textShadowOffset: { width: 1, height: 1 },
+        textShadowRadius: 8,
+    },
     input: {
         width: '80%',
         height: 40,

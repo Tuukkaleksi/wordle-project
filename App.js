@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, TextInput, KeyboardAvoidingView, SafeAreaView, Pressable } from 'react-native'; 
-import { getDatabase, ref, get } from 'firebase/database';
+import { getDatabase, ref, get, update } from 'firebase/database';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Menu from './components/menu';
@@ -13,6 +13,9 @@ export default function App() {
     Ads to raise the points, 30sec = getWord + resetGame, and short = getWord (like 2 points) popup or when pressing and points are 0 get popup if user wants more
     Everytime user clicks a button remove certain point
     Add github button? Credits?
+
+    Guessing right removes a resetGame point
+    If points >= 0 dont remove anymore from database
   */
 
   const [backgroundColor, setBackgroundColor] = useState('white');
@@ -40,10 +43,10 @@ export default function App() {
     });
   }, []);
 
-  async function fetchDataFromDatabase(user) {
-    if (user) {
+  async function fetchDataFromDatabase(currentUser) {
+    if (currentUser) {
       const db = getDatabase();
-      const userRef = ref(db, `${user.uid}`);
+      const userRef = ref(db, `${currentUser.uid}`);
 
       try {
         const snapshot = await get(userRef);
@@ -77,22 +80,55 @@ export default function App() {
     setShowmenu(!showmenu);
   };
 
+  //Remove Points from Database
+  async function removePointsDB(pointsToRemove, action) {
+    if (user) {
+      const db = getDatabase();
+      const userRef = ref(db, `${user.uid}`);
+
+      try {
+        const snapshot = await get(userRef);
+        if (snapshot.exists()) {
+          const userData = snapshot.val();
+
+          //Minus points from user
+          if (action === 'getWord') {
+            if (userData.settings.getWord === 0) {
+              // Do Nothing
+            } else {
+              userData.settings.getWord -= pointsToRemove;
+            }
+          } 
+          if (action === 'resetGame') {
+            if (userData.settings.resetGame === 0) {
+              // Do Nothing
+            } else {
+              userData.settings.resetGame -= pointsToRemove;
+            }
+          }
+
+          //Update user data
+          await update(userRef, userData);
+
+          console.log(`Removed ${pointsToRemove} points from ${action}`);
+        } else {
+          console.log("User data not found.");
+        }
+      } catch (error) {
+        console.log("Error updating user data: ", error);
+      }
+    }
+  }
+
   function generateRandomWord() {
     const randomIndex = Math.floor(Math.random() * words.length);
     return words[randomIndex];
   };
 
-  //Handle input so user cannot enter more or less than 5 letter word.
-  function handleInputGuess(text) {
-    if (text.length <= 5) {
-      setGuess(text);
-    }
-  };
-
   function handleGuess() {
     if (guess === targetWord) {
       alert('Congratulations! You guessed the correct word: ' + targetWord);
-      resetGame();
+      resetGame();// For now
     } else {
       if (guess.length === 5) {
         const updatedGuessedLetters = guessedLetters.map((row, rowIndex) =>
@@ -113,41 +149,82 @@ export default function App() {
   }
 
   //Get a letter when pressing question mark button
-  function getWord() {
-    const unrevealedIndices = targetWord
-      .split('')
-      .map((_, index) => index)
-      .filter(index => !revealedLetters.includes(index));
-  
-    if (unrevealedIndices.length > 0) {
-      const randomIndex = unrevealedIndices[Math.floor(Math.random() * unrevealedIndices.length)];
-      const updatedGuessedLetters = guessedLetters.map((row, rowIndex) =>
-        rowIndex === attempts
-          ? row.map((letter, colIndex) =>
-              colIndex === randomIndex ? targetWord[colIndex] : letter
-            )
-          : row
-      );
-  
-      setGuessedLetters(updatedGuessedLetters);
-      setRevealedLetters([...revealedLetters, randomIndex]);
-    } else {
-      alert("All letters revealed.");
-      console.log("All letters revealed.");
-    }
+  async function getWord() {
+
+    if (user) {
+      const db = getDatabase();
+      const userRef = ref(db, `${user.uid}`);
+      try {
+        const snapshot = await get(userRef);
+        if (snapshot.exists()) {
+            const userData = snapshot.val();
+            if (userData.settings.getWord === 0) {
+              alert("You Don't Have Points to Get a Letter.");
+            } else {
+              removePointsDB(1, 'getWord');
+              const unrevealedIndices = targetWord
+                .split('')
+                .map((_, index) => index)
+                .filter(index => !revealedLetters.includes(index));
+            
+              if (unrevealedIndices.length > 0) {
+                const randomIndex = unrevealedIndices[Math.floor(Math.random() * unrevealedIndices.length)];
+                const updatedGuessedLetters = guessedLetters.map((row, rowIndex) =>
+                  rowIndex === attempts
+                    ? row.map((letter, colIndex) =>
+                        colIndex === randomIndex ? targetWord[colIndex] : letter
+                      )
+                    : row
+                );
+            
+                setGuessedLetters(updatedGuessedLetters);
+                setRevealedLetters([...revealedLetters, randomIndex]);
+              } else {
+                alert("All letters revealed.");
+                console.log("All letters revealed.");
+              }
+            }
+          }
+        } catch (error) {
+          console.log("", error);
+        }
+      } else if (!user) {
+        alert("You currently aren't Signed In.");
+      }
   }  
 
-  function resetGame() {
-    setTargetWord(generateRandomWord());
-    setGuess('');
-    setAttempts(0);
-    setGuessedLetters(Array(6).fill(Array(5).fill('')));
-    setRevealedLetters([]);
+  async function resetGame() {
+    if (user) {
+      const db = getDatabase();
+      const userRef = ref(db, `${user.uid}`);
+      try {
+        const snapshot = await get(userRef);
+        if (snapshot.exists()) {
+            const userData = snapshot.val();
+            if (userData.settings.resetGame === 0) {
+              alert("You Don't Have Points to Reset.");
+            } else {
+              //Reset Functions
+              removePointsDB(1, 'resetGame');
+              setTargetWord(generateRandomWord());
+              setGuess('');
+              setAttempts(0);
+              setGuessedLetters(Array(6).fill(Array(5).fill('')));
+              setRevealedLetters([]);
+            }
+        }
+      } catch (error) {
+        console.log("Error resetGame: ", error);
+      }
+    } else if (!user) {
+      alert("You currently aren't Signed In.");
+    }
   }
 
   return (
   <KeyboardAvoidingView style={[styles.container, { backgroundColor }]}>
       <Text style={[styles.title, { color: darkmode ? 'white' : 'black' }]}>Wordle</Text>
+      <Text style={[styles.undertitle, { color: darkmode ? 'white' : 'black' }]}>{attempts}</Text>
       <SafeAreaView style={styles.guessContainer}>
         {guessedLetters.map((row, rowIndex) => (
           <KeyboardAvoidingView key={rowIndex} style={styles.guessedRow}>
