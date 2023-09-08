@@ -66,7 +66,6 @@ const Store = () => {
 
           if (action === 'getWord') {
             userData.settings.getWord += pointsToAdd;
-            console.log(userData.settings.getWord);
           }
           if (action === 'resetGame') {
             userData.settings.resetGame += pointsToAdd;
@@ -74,8 +73,6 @@ const Store = () => {
   
           // Update user data
           await update(userRef, userData);
-
-          console.log(userData.settings.getWord);
 
           console.log(`Added ${pointsToAdd} points for ${action}.`);
         } else {
