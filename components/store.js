@@ -4,10 +4,6 @@ import { getDatabase, ref, get, update } from 'firebase/database';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import styles from "./styles/storestyles";
 
-/*
-    Adds points to resetGame but doesnt add to getWord?????
-*/
-
 const Store = () => {
   const [user, setUser] = useState(null);
   const [userData, setUserData] = useState(null);
@@ -33,6 +29,20 @@ const Store = () => {
         const snapshot = await get(userRef);
         if (snapshot.exists()) {
           const userData = snapshot.val();
+
+          // Make Sure userData.settings exists
+          if (!userData.settings) {
+            userData.settings = {};
+          }
+
+          //Initialize
+          if (!userData.settings.getWord) {
+            userData.settings.getWord = 0;
+          }
+          if (!userData.settings.resetGame) {
+            userData.settings.resetGame = 0;
+          }
+
           setUserData(userData);
           /* console.log("Data Found: ", userData); */
         } else {
@@ -54,13 +64,9 @@ const Store = () => {
         if (snapshot.exists()) {
           const userData = snapshot.val();
 
-          // Make Sure userData.settings exists
-          if (!userData.settings) {
-            userData.settings = {};
-          }
-
           if (action === 'getWord') {
             userData.settings.getWord += pointsToAdd;
+            console.log(userData.settings.getWord);
           }
           if (action === 'resetGame') {
             userData.settings.resetGame += pointsToAdd;
@@ -68,8 +74,8 @@ const Store = () => {
   
           // Update user data
           await update(userRef, userData);
-  
-          setUserData(userData);
+
+          console.log(userData.settings.getWord);
 
           console.log(`Added ${pointsToAdd} points for ${action}.`);
         } else {
@@ -81,9 +87,9 @@ const Store = () => {
     }
   }
 
-  const handlePackageButtonPress = (pointsForGetWord, pointsForResetGame) => {
-    addPoints(pointsForGetWord, 'getWord');
-    addPoints(pointsForResetGame, 'resetGame');
+  const handlePackageButtonPress = async (pointsForGetWord, pointsForResetGame) => {
+    await addPoints(pointsForGetWord, 'getWord');
+    await addPoints(pointsForResetGame, 'resetGame');
   };
 
   return (
