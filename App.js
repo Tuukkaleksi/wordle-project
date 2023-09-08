@@ -94,14 +94,14 @@ export default function App() {
           //Minus points from user
           if (action === 'getWord') {
             if (userData.settings.getWord === 0) {
-              // Do Nothing
+              //Do nothing
             } else {
               userData.settings.getWord -= pointsToRemove;
             }
           } 
           if (action === 'resetGame') {
             if (userData.settings.resetGame === 0) {
-              // Do Nothing
+              //Do nothing
             } else {
               userData.settings.resetGame -= pointsToRemove;
             }
@@ -125,7 +125,7 @@ export default function App() {
     return words[randomIndex];
   };
 
-  function handleGuess() {
+  async function handleGuess() {
     if (guess === targetWord) {
       alert('Congratulations! You guessed the correct word: ' + targetWord);
       resetGame();// For now
@@ -200,27 +200,27 @@ export default function App() {
       try {
         const snapshot = await get(userRef);
         if (snapshot.exists()) {
-            const userData = snapshot.val();
-            if (userData.settings.resetGame === 0) {
-              alert("You Don't Have Points to Reset.");
+          const userData = snapshot.val();
+          if (userData.settings.resetGame === 0) {
+            alert("You Don't Have Points to Reset.");
+          } else {
+            if (guess === targetWord) {
+              setTargetWord(generateRandomWord());
+              setGuess('');
+              setAttempts(0);
+              setGuessedLetters(Array(6).fill(Array(5).fill('')));
+              setRevealedLetters([]);
             } else {
-              if (guess === targetWord) {
-                setTargetWord(generateRandomWord());
-                setGuess('');
-                setAttempts(0);
-                setGuessedLetters(Array(6).fill(Array(5).fill('')));
-                setRevealedLetters([]);
-              } else {
-                //Reset Functions
-                removePointsDB(1, 'resetGame');
-                setTargetWord(generateRandomWord());
-                setGuess('');
-                setAttempts(0);
-                setGuessedLetters(Array(6).fill(Array(5).fill('')));
-                setRevealedLetters([]);
-              }
+              //Reset Functions
+              removePointsDB(1, 'resetGame');
+              setTargetWord(generateRandomWord());
+              setGuess('');
+              setAttempts(0);
+              setGuessedLetters(Array(6).fill(Array(5).fill('')));
+              setRevealedLetters([]);
             }
-        }
+          }
+      }
       } catch (error) {
         console.log("Error resetGame: ", error);
       }
