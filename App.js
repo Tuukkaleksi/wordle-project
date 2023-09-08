@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Text, View, TextInput, KeyboardAvoidingView, SafeAreaView, Pressable } from 'react-native'; 
 import { getDatabase, ref, get, update } from 'firebase/database';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { StripeProvider } from '@stripe/stripe-react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Menu from './components/menu';
 import words from './components/words';
 import styles from './components/styles/styles';
+
+const publishableKey = 'pk_test_51NnxgNESWUry15Yz2f8DQ7BhvKJtw4T4SGdytDBdN2tqIR5de3QQn4BcoP3hwx5UB5cmWIuFE7ySaihajXo0MGy900dp1zqbHV';
 
 export default function App() {
 
@@ -230,6 +233,7 @@ export default function App() {
   }
 
   return (
+<StripeProvider publishableKey={publishableKey}>
   <KeyboardAvoidingView style={[styles.container, { backgroundColor }]}>
       <Text style={[styles.title, { color: darkmode ? 'white' : 'black' }]}>Wordle</Text>
       <Text style={[styles.undertitle, { color: darkmode ? 'white' : 'black' }]}>{attempts}</Text>
@@ -287,5 +291,6 @@ export default function App() {
       <Text style={[{ color: darkmode ? 'white' : 'black' }]}>{targetWord}</Text>
       {showmenu && <Menu />}
   </KeyboardAvoidingView>
+</StripeProvider>
   );
 };
