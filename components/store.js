@@ -32,7 +32,7 @@ const Store = () => {
         const snapshot = await get(userRef);
         if (snapshot.exists()) {
           const userData = snapshot.val();
-          console.log("Data Found: ", userData);
+          /* console.log("Data Found: ", userData); */
         } else {
           console.log("Data not Found.");
         }

@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
         color: '#242424',
     },
     logTextTitle: {
-        fontSize: 24,
+        fontSize: 20,
         marginBottom: 10,
         color: '#242424',
         fontWeight: 'bold',

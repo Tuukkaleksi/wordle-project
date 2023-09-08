@@ -61,7 +61,6 @@ const Menu = () => {
         try {
             const { user } = await createUserWithEmailAndPassword(auth, email, password);
             console.log("User Created.");
-
             //Create a database entry for the user
             const db = getDatabase();
             const userRef = ref(db, `${user.uid}`);
@@ -111,7 +110,7 @@ const Menu = () => {
             {user ? (
                 // Display user information when logged in
                 <View style={styles.logContainer}>
-                    <Text style={styles.logTextTitle}>Statistics{/* , {user.email} */}</Text>
+                    <Text style={styles.logTextTitle}>Statistics, {user.email}</Text>
                     {userData ? (
                         <View style={{alignItems: 'center', width: '80%'}}>
                             <Text style={styles.logText}>Level: <Text style={{fontWeight: 'bold'}}>{userData.settings.level}</Text></Text>
