@@ -204,13 +204,21 @@ export default function App() {
             if (userData.settings.resetGame === 0) {
               alert("You Don't Have Points to Reset.");
             } else {
-              //Reset Functions
-              removePointsDB(1, 'resetGame');
-              setTargetWord(generateRandomWord());
-              setGuess('');
-              setAttempts(0);
-              setGuessedLetters(Array(6).fill(Array(5).fill('')));
-              setRevealedLetters([]);
+              if (guess === targetWord) {
+                setTargetWord(generateRandomWord());
+                setGuess('');
+                setAttempts(0);
+                setGuessedLetters(Array(6).fill(Array(5).fill('')));
+                setRevealedLetters([]);
+              } else {
+                //Reset Functions
+                removePointsDB(1, 'resetGame');
+                setTargetWord(generateRandomWord());
+                setGuess('');
+                setAttempts(0);
+                setGuessedLetters(Array(6).fill(Array(5).fill('')));
+                setRevealedLetters([]);
+              }
             }
         }
       } catch (error) {

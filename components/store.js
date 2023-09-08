@@ -10,6 +10,7 @@ import styles from "./styles/storestyles";
 
 const Store = () => {
   const [user, setUser] = useState(null);
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     const auth = getAuth();
@@ -32,6 +33,7 @@ const Store = () => {
         const snapshot = await get(userRef);
         if (snapshot.exists()) {
           const userData = snapshot.val();
+          setUserData(userData);
           /* console.log("Data Found: ", userData); */
         } else {
           console.log("Data not Found.");
@@ -52,24 +54,23 @@ const Store = () => {
         if (snapshot.exists()) {
           const userData = snapshot.val();
 
+          // Make Sure userData.settings exists
+          if (!userData.settings) {
+            userData.settings = {};
+          }
+
           if (action === 'getWord') {
-            if (!userData.settings.getWord) {
-                userData.settings.getWord = 0;
-            }
             userData.settings.getWord += pointsToAdd;
-          } else if (action === 'resetGame') {
-            if (!userData.settings.resetGame) {
-                userData.settings.resetGame = 0;
-            }
+          }
+          if (action === 'resetGame') {
             userData.settings.resetGame += pointsToAdd;
-          } else {
-            console.log("Invalid action.");
-            return;
           }
   
           // Update user data
           await update(userRef, userData);
   
+          setUserData(userData);
+
           console.log(`Added ${pointsToAdd} points for ${action}.`);
         } else {
           console.log("User data not found.");
