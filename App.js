@@ -232,7 +232,7 @@ export default function App() {
   return (
   <KeyboardAvoidingView style={[styles.container, { backgroundColor }]}>
       <Text style={[styles.title, { color: darkmode ? 'white' : 'black' }]}>Wordle</Text>
-      <Text style={[styles.undertitle, { color: darkmode ? 'white' : 'black' }]}>{attempts}</Text>
+      <Text style={[styles.undertitle, { color: darkmode ? 'white' : 'black' }]}>Attempts [ {attempts} ]</Text>
       <SafeAreaView style={styles.guessContainer}>
         {guessedLetters.map((row, rowIndex) => (
           <KeyboardAvoidingView key={rowIndex} style={styles.guessedRow}>
@@ -284,7 +284,7 @@ export default function App() {
           <Icon name='user' size={15} color='white' />
         </Pressable>
       </View>
-      <Text style={[{ color: darkmode ? 'white' : 'black' }]}>{targetWord}</Text>
+      {/* <Text style={[{ color: darkmode ? 'white' : 'black' }]}>{targetWord}</Text> */}
       {showmenu && <Menu />}
   </KeyboardAvoidingView>
   );

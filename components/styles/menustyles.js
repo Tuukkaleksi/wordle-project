@@ -1,14 +1,16 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
+
+const isWeb = Platform.OS === 'web';
 
 const styles = StyleSheet.create({
     menu: {
         flex: 1,
-        backgroundColor: 'rgba(36, 36, 36, 0.65)',
+        backgroundColor: 'rgba(36, 36, 36, 1)',
         justifyContent: 'center',
         alignItems: 'center',
         zIndex: 999,
         position: 'absolute',
-        width: '90%',
+        width: isWeb ? '30%' : '90%',
         height: 400,
         borderRadius: 20,
         borderWidth: 2,
@@ -33,7 +35,7 @@ const styles = StyleSheet.create({
         textShadowRadius: 8,
     },
     input: {
-        width: '100%',
+        width: '65%',
         height: 40,
         backgroundColor: 'white',
         borderColor: 'white',
@@ -58,7 +60,7 @@ const styles = StyleSheet.create({
     button: {
         backgroundColor: 'white',
         marginTop: 10,
-        width: '100%',
+        width: '50%',
         height: 40,
         justifyContent: 'center',
         alignItems: 'center',

@@ -1,4 +1,8 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
+
+// -------- WEB : MOBILE --------
+// isWeb ? '50%' : '80%',
+const isWeb = Platform.OS === 'web';
 
 const styles = StyleSheet.create({
     container: {
@@ -14,21 +18,19 @@ const styles = StyleSheet.create({
         top: 120,
         fontSize: 36,
         color: 'white',
-        textShadowColor: 'darkcyan',
+        alignSelf: 'center',
         textShadowOffset: { width: 1, height: 1 },
-        textShadowRadius: 8,
     },
     undertitle: {
         position: 'absolute',
         top: 165,
         fontSize: 24,
         color: 'white',
-        textShadowColor: 'darkcyan',
+        alignSelf: 'center',
         textShadowOffset: { width: 1, height: 1 },
-        textShadowRadius: 8,
     },
     input: {
-        width: '80%',
+        width: isWeb ? '20%' : '80%',
         height: 40,
         backgroundColor: 'transparent',
         borderColor: 'darkcyan',
@@ -44,8 +46,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-end',
         position: 'absolute',
-        bottom: 20,
-        right: 20,
+        bottom: isWeb ? 120 : 20,
+        right: isWeb ? 'auto' : 20,
         marginTop: 0,
     },
     button: {
@@ -71,8 +73,10 @@ const styles = StyleSheet.create({
         marginTop: 0,
         marginBottom: 5,
         position: 'absolute',
-        bottom: '25%',
-        left: '20%',
+        bottom: 'auto',
+        left: isWeb ? 'auto' : 'auto',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     guessedRow: {
         flexDirection: 'row',
@@ -80,7 +84,7 @@ const styles = StyleSheet.create({
     guessedLetterBox: {
         width: 40,
         height: 40,
-        marginRight: 10,
+        marginRight: isWeb ? 20 : 10,
         marginBottom: 10,
         justifyContent: 'center',
         alignItems: 'center',
