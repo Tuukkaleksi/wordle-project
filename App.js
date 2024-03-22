@@ -52,10 +52,8 @@ export default function App() {
         const snapshot = await get(userRef);
         if (snapshot.exists()) {
           const userData = snapshot.val();
-          console.log("Data Found: ", userData);
           setDataFound(true);
         } else {
-          console.log("Data not Found.");
           setDataFound(false);
         }
       } catch (error) {

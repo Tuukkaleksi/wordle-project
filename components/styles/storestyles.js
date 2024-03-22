@@ -42,6 +42,11 @@ const styles = StyleSheet.create({
         color: 'black',
         fontSize: 20,
     },
+    closeButton: {
+        position: 'absolute',
+        top: 10,
+        right: 10,
+    },
 });
 
 export default styles;

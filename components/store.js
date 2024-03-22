@@ -2,11 +2,18 @@ import React, { useState, useEffect } from "react";
 import { Text, View, Pressable } from 'react-native';
 import { getDatabase, ref, get, update } from 'firebase/database';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import Menu from "./menu";
 import styles from "./styles/storestyles";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const Store = () => {
   const [user, setUser] = useState(null);
   const [userData, setUserData] = useState(null);
+  const [showmenu, setShowmenu] = useState(false);
+
+  const basicValue = '5.99€';
+  const premiumValue = '12.99€';
+  const ultimateValue = '24.99€';
 
   useEffect(() => {
     const auth = getAuth();
@@ -89,17 +96,32 @@ const Store = () => {
     await addPoints(pointsForResetGame, 'resetGame');
   };
 
+  const toggleMenu = () => {
+    setShowmenu(!showmenu);
+  };
+
   return (
+    <>
+    {!showmenu ? (
     <View style={styles.packageContainer}>
+
+      {/* Close Store Button */}
+      <Pressable
+        style={styles.closeButton}
+        onPress={toggleMenu}
+      >
+        <Icon name="close" size={50} color="white" />
+      </Pressable>
+
       <Text style={styles.packageName}>Store</Text>
-      
+
       {/* Package 1 */}
       <Pressable
         style={styles.packageButton}
         onPress={() => handlePackageButtonPress(4, 1)}
       >
         <Text style={styles.packageButtonText}>Basic Point Package</Text>
-        <Text style={styles.packagePoints}>$5.99</Text>
+        <Text style={styles.packagePoints}>{basicValue}</Text>
         <Text style={styles.packageDescription}>With This Package Get | Help: 4, Reset: 1</Text>
       </Pressable>
 
@@ -109,7 +131,7 @@ const Store = () => {
         onPress={() => handlePackageButtonPress(12, 2)}
       >
         <Text style={styles.packageButtonText}>Premium Point Package</Text>
-        <Text style={styles.packagePoints}>$12.99</Text>
+        <Text style={styles.packagePoints}>{premiumValue}</Text>
         <Text style={styles.packageDescription}>With This Package Get | Help: 12, Reset: 2</Text>
       </Pressable>
 
@@ -119,10 +141,16 @@ const Store = () => {
         onPress={() => handlePackageButtonPress(20, 4)}
       >
         <Text style={styles.packageButtonText}>Ultimate Point Package</Text>
-        <Text style={styles.packagePoints}>$24.99</Text>
+        <Text style={styles.packagePoints}>{ultimateValue}</Text>
         <Text style={styles.packageDescription}>With This Package Get | Help: 20, Reset: 4</Text>
       </Pressable>
     </View>
+    ) : (
+      <>
+      {showmenu}
+      </>
+    )}
+    </>
   );
 };
 
