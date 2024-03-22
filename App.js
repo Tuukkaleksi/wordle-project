@@ -8,16 +8,6 @@ import words from './components/words';
 import styles from './components/styles/styles';
 
 export default function App() {
-
-  /* 
-    Ads to raise the points, 30sec = getWord + resetGame, and short = getWord (like 2 points) popup or when pressing and points are 0 get popup if user wants more
-    Everytime user clicks a button remove certain point
-    Add github button? Credits?
-
-    Guessing right removes a resetGame point
-    If points >= 0 dont remove anymore from database
-  */
-
   const [backgroundColor, setBackgroundColor] = useState('white');
   const [darkmode, setDarkMode] = useState(false);
   const [showmenu, setShowmenu] = useState(false);
