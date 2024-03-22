@@ -107,6 +107,12 @@ const styles = StyleSheet.create({
     includedBox: {
         backgroundColor: 'yellow',
     },
+    github: {
+        position: 'absolute',
+        bottom: 20,
+        right: 'auto',
+        shadowColor: 'white',
+    },
 });
 
 export default styles;

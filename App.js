@@ -227,6 +227,12 @@ export default function App() {
     }
   }
 
+  const openGithub = () => {
+    // Open Github Link new tab
+    const githubLink = 'https://github.com/Tuukkaleksi/wordle-project';
+    window.open(githubLink, '_blank');
+  };
+
   return (
   <KeyboardAvoidingView style={[styles.container, { backgroundColor }]}>
       <Text style={[styles.title, { color: darkmode ? 'white' : 'black' }]}>Wordle</Text>
@@ -282,7 +288,7 @@ export default function App() {
           <Icon name='user' size={15} color='white' />
         </Pressable>
       </View>
-      {/* <Text style={[{ color: darkmode ? 'white' : 'black' }]}>{targetWord}</Text> */}
+      <Text style={styles.github} onPress={openGithub}>Github</Text>
       {showmenu && <Menu />}
   </KeyboardAvoidingView>
   );
