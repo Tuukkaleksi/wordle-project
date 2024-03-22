@@ -51,7 +51,6 @@ const Store = () => {
           }
 
           setUserData(userData);
-          /* console.log("Data Found: ", userData); */
         } else {
           console.log("Data not Found.");
         }

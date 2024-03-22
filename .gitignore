@@ -10,6 +10,9 @@ web-build/
 
 /components/firebaseConfig.js
 firebaseConfig.js
+package-lock.json
+eas.json
+package.json
 
 # Native
 *.orig.*
